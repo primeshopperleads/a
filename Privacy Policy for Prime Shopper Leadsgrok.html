@@ -1,0 +1,106 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy for Prime Shopper Leads</title>
+</head>
+<body>
+    <h1>Privacy Policy for Prime Shopper Leads</h1>
+    <p><strong>Effective Date: June 30, 2025</strong></p>
+    <p>This Privacy Policy explains how Prime Shopper Leads (“we,” “us,” or “our”) collects, uses, shares, and protects information when you visit our website at www.primeshopperleads.com or use our services (“Services”). By using our Services, you agree to this policy. If you don’t agree, please don’t use our Services.</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>We collect limited personal information to provide our Services, including:</p>
+    <ul>
+        <li><strong>Contact Information:</strong> Name, email address, or phone number, only when you voluntarily provide it (e.g., via contact forms).</li>
+        <li><strong>Payment Information:</strong> If you make a purchase, Stripe handles your payment details (e.g., credit card number). We do not store this data.</li>
+        <li><strong>Usage Data:</strong> Information about how you use our website, such as IP address, browser type, and pages visited.</li>
+        <li><strong>Grocery Shopper Data:</strong> Our core offering includes anonymized data on grocery delivery patterns, such as addresses, preferred stores (e.g., Walmart, Sprouts), and order counts (up to 1100 orders). No personal identifiers like names or emails are included.</li>
+    </ul>
+    <p>We do not collect sensitive personal information (e.g., race, religion, or health data).</p>
+
+    <h2>2. How We Use Your Information</h2>
+    <p>We use information to:</p>
+    <ul>
+        <li>Provide and improve our Services, including delivering anonymized grocery shopper data to buyers.</li>
+        <li>Process payments via Stripe.</li>
+        <li>Communicate with you about your account or purchases.</li>
+        <li>Send marketing emails (you can opt out anytime).</li>
+        <li>Comply with legal obligations, including privacy laws like CCPA and GDPR.</li>
+    </ul>
+
+    <h2>3. Sharing Your Information</h2>
+    <p>We may share:</p>
+    <ul>
+        <li><strong>Anonymized Grocery Shopper Data:</strong> Addresses, store preferences, and order counts with buyers (e.g., delivery services) for marketing or analytics purposes. This data contains no personal identifiers.</li>
+        <li><strong>Service Providers:</strong> Like Stripe, for payment processing.</li>
+        <li><strong>Legal Authorities:</strong> If required by law.</li>
+    </ul>
+    <p>We do not sell personal information. All shared data is anonymized and complies with CCPA and GDPR.</p>
+
+    <h2>4. Data Retention</h2>
+    <p>We keep contact and usage data for 12 months after your last interaction with our Services, unless required by law to retain longer. Anonymized grocery shopper data is retained indefinitely for sale unless requested otherwise.</p>
+
+    <h2>5. Your Privacy Rights</h2>
+    <p>Depending on your location, you may have rights to:</p>
+    <ul>
+        <li>Access, correct, or delete your personal data.</li>
+        <li>Opt out of marketing communications.</li>
+        <li>Request a copy of your data.</li>
+    </ul>
+    <p>To exercise these rights, email us at on_purps@yahoo.com.</p>
+
+    <h2>6. Security</h2>
+    <p>We use industry-standard encryption and secure storage to protect all data, including anonymized grocery shopper data. However, no system is 100% secure, so use our Services at your own risk.</p>
+
+    <h2>7. Children’s Privacy</h2>
+    <p>We do not knowingly collect data from children under 18. If we learn we have, we’ll delete it.</p>
+
+    <h2>8. Updates</h2>
+    <p>We may update this policy. Check back for changes.</p>
+
+    <h2>9. Contact Us</h2>
+    <p>Questions? Email <a href="mailto:on_purps@yahoo.com">on_purps@yahoo.com</a> or write to:</p>
+    <p>Prime Shopper Leads<br>4951 Cherry Ave, 206<br>San Jose, CA 95118</p>
+</body>
+</html>

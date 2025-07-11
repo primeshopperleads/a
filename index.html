@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymized Grocery Shopper Leads | Walmart & Sprouts Insights</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            color: #333;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .features-list {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-item h3 {
+            font-size: 1.8rem;
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .cta-button-hero {
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .cta-button-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .content-section {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .content-section h3 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #4f46e5;
+        }
+
+        .content-section p, .content-section ul {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-section ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .content-section ul li::before {
+            content: '✓';
+            color: #10b981;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .testimonials-section {
+            background-color: #f8fafc;
+            padding: 80px 0;
+        }
+
+        .testimonials-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-card strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #4f46e5;
+        }
+        
+        .pricing-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            color: #333;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-header h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .pricing-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            color: #333;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.popular {
+            border: 3px solid #4f46e5;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4f46e5;
+            color: white;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .plan-price {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #4f46e5;
+        }
+        
+        .price-currency {
+            font-size: 1.5rem;
+            vertical-align: top;
+        }
+        
+        .plan-leads {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        
+        .features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .checkmark {
+            color: #10b981;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .cta-button {
+            width: 100%;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .guarantee {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .guarantee-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .guarantee h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .guarantee p {
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-header h2 {
+                font-size: 2rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+            
+            .price {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="container">
+            <h1>Anonymized Grocery Shopper Leads | Walmart & Sprouts Insights</h1>
+            <p>Skip the guesswork. Get direct access to customers with **anonymized, verified addresses** who are habitual grocery delivery spenders, mostly shopping at Walmart and Sprouts, with up to 1100 orders over five years.</p>
+            <div class="features-list">
+                <div class="feature-item">
+                    <h3>1055+ Verified Customers</h3>
+                    <p>Extensive database of high-quality, anonymized leads.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Weekly Delivery Habits</h3>
+                    <p>Target consistent buyers with reliable order patterns.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Five Years of History</h3>
+                    <p>Leverage historical data for insights into preferences.</p>
+                </div>
+            </div>
+            <a href="#pricing" class="cta-button-hero">Get Leads Now</a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Why These Leads Convert 3x Better Than Cold Prospects</h2>
+            <p>Thanks to their loyalty and steady orders, these anonymized leads convert 3x better than cold prospects. They’re active consumers with proven grocery delivery spending, saving you time on prospecting.</p>
+            <h3>Fully Verified</h3>
+            <p>Anonymized addresses verified through multiple data sources and recent activity.</p>
+            <h3>Consistent Buyers</h3>
+            <p>Weekly orders for years, primarily from Walmart and Sprouts.</p>
+            <h3>Proven Spenders</h3>
+            <p>Average order value of $127 with up to 1100 documented orders.</p>
+            <h3>Ready to Switch</h3>
+            <p>73% open to new delivery services for better value.</p>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2>Join 50+ Businesses Already Growing With Our Leads</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Increased our customer base by 40% in just 2 months. These leads actually convert!"</p>
+                    <strong>Sarah Johnson</strong> Fresh Delivery Co.
+                </div>
+                <div class="testimonial-card">
+                    <p>"These leads converted at 3x our normal rate. ROI was immediate and substantial."</p>
+                    <strong>Mike Chen</strong> Metro Grocery Express
+                </div>
+                <div class="testimonial-card">
+                    <p>"Finally, leads that actually buy. Cut our acquisition costs by 60%."</p>
+                    <strong>Lisa Rodriguez</strong> Healthy Meals Direct
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>What You Get With Every PrimeShopper Lead Package</h2>
+            <p>Each package offers actionable, anonymized data tailored to your outreach needs.</p>
+            <ul>
+                <li>
+                    <h3>Verified Customer Data</h3>
+                    <p>Anonymized addresses of consistent online grocery shoppers.</p>
+                </li>
+                <li>
+                    <h3>Purchase Patterns</h3>
+                    <p>Delivery frequency and order counts, with many exceeding 1000 orders.</p>
+                </li>
+                <li>
+                    <h3>Geographic Clustering</h3>
+                    <p>Organized by location for route planning.</p>
+                </li>
+                <li>
+                    <h3>Preferred Stores</h3>
+                    <p>Insights into shopping habits, mainly Walmart and Sprouts.</p>
+                </li>
+                <li>
+                    <h3>Instant Download</h3>
+                    <p>CSV format ready for your CRM system.</p>
+                </li>
+            </ul>
+            <p><strong>Note:</strong> Data includes only anonymized addresses, store preferences, and order counts—no personal info like names or emails, ensuring CCPA/GDPR compliance.</p>
+            <h2>Limited Availability - Exclusive Territory Rights</h2>
+            <p>Act fast, few spots left! One business per area for max conversions.</p>
+            <p>73% of territories claimed</p>
+            <p>24hrs average time to sell out</p>
+        </div>
+    </section>
+
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="pricing-header">
+                <h2>Investment That Pays For Itself</h2>
+                <p>Choose a package with vetted, anonymized leads proven to convert.</p>
+            </div>
+            <img src="URL_OF_SHOPPING_CART_IMAGE" alt="Grocery Shopping Profits" style="width:200px; display: block; margin: 0 auto 20px;">
+            <img src="URL_OF_CHECKMARK_IMAGE" alt="Approved Data" style="width:150px; display: block; margin: 0 auto 40px;">
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Starter</div>
+                    <div class="plan-price">
+                        <span class="price"><span class="price-currency">$</span>349</span>
+                    </div>
+                    <div class="plan-leads">100 Verified Leads</div>
+                    <ul class="features">
+                        <li><span class="checkmark">✓</span> Anonymized address data</li>
+                        <li><span class="checkmark">✓</span> Up to 300 orders</li>
+                        <li><span class="checkmark">✓</span> Ideal for mailer campaigns</li>
+                        <li><span class="checkmark">✓</span> Money-back guarantee</li>
+                    </ul>
+                    <a href="https://buy.stripe.com/eVqaEX9M414Z5M40xZcIE02" class="cta-button" id="starter-button">Get Started</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-name">Professional</div>
+                    <div class="plan-price">
+                        <span class="price"><span class="price-currency">$</span>1100</span>
+                    </div>
+                    <div class="plan-leads">500 Verified Leads</div>
+                    <ul class="features">
+                        <li><span class="checkmark">✓</span> Anonymized address data</li>
+                        <li><span class="checkmark">✓</span> Preferred stores (Walmart, Sprouts)</li>
+                        <li><span class="checkmark">✓</span> Up to 1100 orders</li>
+                        <li><span class="checkmark">✓</span> Money-back guarantee</li>
+                    </ul>
+                    <a href="https://buy.stripe.com/00wbJ1aQ83d71vO5SjcIE03" class="cta-button" id="professional-button">Get Professional</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">
+                        <span class="price"><span class="price-currency">$</span>1900</span>
+                    </div>
+                    <div class="plan-leads">1055 Verified Leads</div>
+                    <ul class="features">
+                        <li><span class="checkmark">✓</span> Anonymized address data</li>
+                        <li><span class="checkmark">✓</span> Preferred stores (Walmart, Sprouts)</li>
+                        <li><span class="checkmark">✓</span> Up to 1100 orders</li>
+                        <li><span class="checkmark">✓</span> Money-back guarantee</li>
+                    </ul>
+                    <a href="https://buy.stripe.com/eVqcN52jCcNHeiA0xZcIE04" class="cta-button" id="enterprise-button">Get Enterprise</a>
+                </div>
+            </div>
+            <div class="guarantee">
+                <div class="guarantee-icon">🔒</div>
+                <h3>Money-back guarantee if leads don’t perform</h3>
+                <p>If leads don’t deliver results after genuine use, we’ll refund you upon proof.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 PrimeShopperLeads. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
